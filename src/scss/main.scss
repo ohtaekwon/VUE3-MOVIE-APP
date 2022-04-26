@@ -1,0 +1,19 @@
+// 2.Variable defaults 추가
+// Required
+@import "../../node_modules/bootstrap/scss/functions";
+
+// Default variable overrides 
+// 2-1. 재정의 내용 작성
+$primary: #FDC000;
+
+// Required
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+@import "../../node_modules/bootstrap/scss/root";
+
+
+
+
+// 1. bootstrap에서 제공하고 있는 기본적인 스타일을 가져온다.
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
