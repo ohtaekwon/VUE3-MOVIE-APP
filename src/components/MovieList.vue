@@ -1,32 +1,45 @@
 <template>
-  <div class="contaioner">
+  <div class="container">
     <div class="inner">
-      <MovieItem 
-        v-for="movie in movies"
-        :key="movie.imdbID"
-        :movie="movie"/>
-    </div>
+      <div class="message">
+        {{ message }}
+      </div>
+      <div class="movies">
+        <MovieItem 
+          v-for="movie in movies"
+          :key="movie.imdbID"
+          :movie="movie"/>
+      </div>
+      </div>
   </div>
 </template>
 
 <script>
 import MovieItem from '~/components/MovieItem.vue'
 
-
-
 export default {
   components:{
     MovieItem:MovieItem
   },
-  // data() {
-  //   return{
-  //     movies:[]
-  //   }
-  // },
   computed:{
     movies(){
       return this.$store.state.movie.movies
+    },
+    message(){
+      return this.$store.state.movie.message
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.container{
+  .movies{
+    display: flex; // 한줄의 수평
+    flex-wrap: wrap; // 줄 바꿈의 수평처리
+    justify-content: center; // 수평 가운데 정렬
+  }
+}
+
+
+</style>

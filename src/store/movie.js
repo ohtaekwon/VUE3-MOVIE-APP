@@ -14,8 +14,7 @@ export default {
   }),
   // computed
   getters : {},
-  // methods
-  // 변이 : 관리하는 데이터를 변경시킬 수 있다.
+  // methods(변이) : 관리하는 데이터를 변경시킬 수 있다.
   mutations : {
     updateState(state, payload){
       // {'movies', 'mesage', 'loading'}
@@ -30,11 +29,13 @@ export default {
   // 그 외 나머지 메소드
   actions : {
     async searchMovies({ state, commit }, payload){
-      const { title, type, number, year } = payload 
-      const OMDB_API_KEY = "7035c60c"
+     try{
+        // const { title, type, number, year } = payload 
 
-      // 3-2. 최초의 요청은 page가 1
-      const res = await axios.get(`https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${title}&type=${type}&y=${year}&page=1`)
+      const res = await _fetchMovie({
+        ...payload,
+        page:1
+      })
       const { Search, totalResults } = res.data
       commit('updateState',{
         movies: _uniqBy(Search,'imdbID')
@@ -52,10 +53,13 @@ export default {
         for (let page=2; page <= pageLength; page+=1){
           // 4. number의 종류 [10,20,30]
           // number가 10이면, 2>1 이 되고,  break
-          if (page > (number / 10) ) break
+          if (page > (payload.number / 10) ) break
           
           // 3-1. 추가 요청이므로, page는 ${page}로 할당한다.
-          const res = await axios.get(`https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${title}&type=${type}&y=${year}&page=${page}`)
+          const res = await _fetchMovie({
+            ...payload,
+            page:page // page로 생략이 가능하다. 
+          })
           // 3-3. Search라는 데이터에 할당
           const { Search } = res.data
           // uniqBy 적용
@@ -67,6 +71,33 @@ export default {
           })
         }
       }
+     }catch (message){
+      commit('updateState',{
+        movies:[],
+        message:message
+      })
+     }
     }
   }
  }
+// 현재 파일 내부에서만 사용 : _ 
+ function _fetchMovie(payload){
+  const {title, type, year, page} = payload
+  const OMDB_API_KEY = '7035c60c'
+  const url = `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${title}&type=${type}&y=${year}&page=${page}`
+  
+  // 비동기 동작
+  return new Promise( (resolve, reject)=>{  
+    axios.get(url)
+      .then((res)=>{
+        if (res.data.Error){
+          reject(res.data.Error)
+        }
+        resolve(res)
+      })
+      .catch((err)=>{
+        reject(err.message)
+      })
+  })
+
+}
