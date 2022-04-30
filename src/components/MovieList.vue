@@ -40,6 +40,4 @@ export default {
     justify-content: center; // 수평 가운데 정렬
   }
 }
-
-
 </style>

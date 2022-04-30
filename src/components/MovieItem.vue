@@ -1,6 +1,6 @@
 <template>
   <div
-    :style="{backgroundImage:`url(${movie.Poster})`}"
+    v-bind:style="{backgroundImage:`url(${movie.Poster})`}"
     class="movie">
     <div class="info">
       <div class="year">
@@ -37,6 +37,15 @@ export default {
   background-size:cover; // 배경이미지가 movie라는 클래스 전체를 덮을 수 있도록 넓이에 맞춰서 출력
   overflow: hidden; // 넘치는 내용을 숨긴다.
   position: relative; // 포지션 값을 지정
+  &:hover::after{
+    content:"";
+    position: absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    border:6px solid $primary;
+  }
   .info{
     background-color:rgba($black, .3);
     width:100%;
@@ -46,6 +55,19 @@ export default {
     position: absolute; // 부모요소를 기준으로 배치한다.
     left : 0px; // 왼쪽에서 0px 지점
     bottom : 0px; // 아레에서 0px 지점
+
+    // 1.
+    backdrop-filter: blur(10px);
+    .year{
+      color:$primary;
+    }
+    .title{
+      color:$white;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+
   }
 }
 
