@@ -6,12 +6,19 @@
 // 2-1. 재정의 내용 작성
 $primary: #FDC000;
 
+$container-max-widths: (
+  sm: 540px,
+  md: 704px,
+  lg: 924px,
+  xl: 1140px,
+  xxl: 1364px
+);
+
+
 // Required
 @import "../../node_modules/bootstrap/scss/variables";
 @import "../../node_modules/bootstrap/scss/mixins";
 @import "../../node_modules/bootstrap/scss/root";
-
-
 
 
 // 1. bootstrap에서 제공하고 있는 기본적인 스타일을 가져온다.
