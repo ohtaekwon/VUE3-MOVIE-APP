@@ -2,6 +2,7 @@
 import axios from 'axios'
 // Lodash 패키지에서 uniqBy 가져오기
 import _uniqBy from 'lodash/uniqBy'
+import { storeKey } from 'vuex'
 
 export default {
   // module
@@ -9,8 +10,8 @@ export default {
   // data
   state : () => ({
     movies:[],
-    message:'',
-    lodaing:false
+    message:'Search for the movie title!',
+    loading:false // 기본값이 false로 loading이 되고 있지 않은 상태
   }),
   // computed
   getters : {},
@@ -29,9 +30,16 @@ export default {
   // 그 외 나머지 메소드
   actions : {
     async searchMovies({ state, commit }, payload){
-     try{
-        // const { title, type, number, year } = payload 
-
+      // 
+      if (state.loading) return 
+    
+      // 데이터 수정
+      commit('updateState',{
+        message:'', // 검색 시에 제일 처음에는 기본 메시지는 없는 메시지로
+        loading:true // 검색이 시작되면, loading이 True, 검색이 완료되면 종료가 되어야 한다.
+      })
+      try{
+      // const { title, type, number, year } = payload 
       const res = await _fetchMovie({
         ...payload,
         page:1
@@ -71,12 +79,16 @@ export default {
           })
         }
       }
-     }catch (message){
-      commit('updateState',{
-        movies:[],
-        message:message
-      })
-     }
+      }catch (message){
+        commit('updateState',{
+          movies:[],
+          message:message
+        })
+      } finally{
+        commit('updateState',{
+          loading:false // 검색이 완료가 됐으므로, fasle로 마무리한다.
+        })
+      }
     }
   }
  }
@@ -98,6 +110,7 @@ export default {
       .catch((err)=>{
         reject(err.message)
       })
+
   })
 
 }
