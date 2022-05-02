@@ -45,7 +45,6 @@ export default {
   }
 }
 </script>
-
 <style lang="scss" scoped>
 // main.scss에서 가져오기
 @import "~/scss/main.scss";

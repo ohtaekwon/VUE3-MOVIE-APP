@@ -30,7 +30,7 @@ export default {
   // 그 외 나머지 메소드
   actions : {
     async searchMovies({ state, commit }, payload){
-      // 
+      // loading이 true일 때, 
       if (state.loading) return 
     
       // 데이터 수정

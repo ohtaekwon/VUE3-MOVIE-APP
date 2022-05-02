@@ -19,6 +19,5 @@
   span{
     color:$primary;
   }
-
 }
 </style>
