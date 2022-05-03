@@ -11,11 +11,20 @@
         <div class="skeleton etc"></div>
       </div>
     </div>
+    <Loader 
+      :size="3"
+      :z-index="9"
+      :fixed="true"/>
   </div>
 </template>
 
 <script>
+import Loader from '~/components/Loader.vue'
+
 export default {
+  components:{
+    Loader:Loader
+  },
   // Life cycle
   created() {
     console.log('create :', this.$route)
