@@ -29,5 +29,6 @@ h1{
 p{
   margin:30px 0;
   color:$gray-600;
+  font-size:16px;
 }
 </style>

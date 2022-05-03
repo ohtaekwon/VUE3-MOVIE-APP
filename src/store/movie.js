@@ -11,7 +11,8 @@ export default {
   state : () => ({
     movies:[],
     message:'Search for the movie title!',
-    loading:false // 기본값이 false로 loading이 되고 있지 않은 상태
+    loading:false, // 기본값이 false로 loading이 되고 있지 않은 상태
+    theMovie:{}
   }),
   // computed
   getters : {},
@@ -38,6 +39,7 @@ export default {
         message:'', // 검색 시에 제일 처음에는 기본 메시지는 없는 메시지로
         loading:true // 검색이 시작되면, loading이 True, 검색이 완료되면 종료가 되어야 한다.
       })
+
       try{
       // const { title, type, number, year } = payload 
       const res = await _fetchMovie({
@@ -89,14 +91,41 @@ export default {
           loading:false // 검색이 완료가 됐으므로, fasle로 마무리한다.
         })
       }
+    },
+    // searchMovieWithId 함수를 만든다. 비동기로
+    async searchMovieWithId({state,commit},payload){
+      if (state.loading) return // state 의 loading이 true이면, 함수를 종료
+      
+      // loading이 True가 아닌 경우에는,
+      commit('updateState',{
+        theMovie:{},
+        loading:true
+      })
+      try{
+        const res=await _fetchMovie(payload)
+        // console.log('searchMovieWithId :',res)
+        commit('updateState',{
+          theMovie:res.data
+        })
+      }catch (error){
+        commit('updateState',{
+          thisMovie:{}
+        })
+      } finally {
+        commit('updateState',{
+          loading:false
+        })
+      }
     }
   }
  }
 // 현재 파일 내부에서만 사용 : _ 
  function _fetchMovie(payload){
-  const {title, type, year, page} = payload
+  const {title, type, year, page, id} = payload
   const OMDB_API_KEY = '7035c60c'
-  const url = `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${title}&type=${type}&y=${year}&page=${page}`
+  const url = id 
+    ? `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&i=${id}` 
+    : `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${title}&type=${type}&y=${year}&page=${page}`
   
   // 비동기 동작
   return new Promise( (resolve, reject)=>{  
