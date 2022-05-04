@@ -57,6 +57,7 @@ header{
   padding:0 40px;
   display: flex; // 내부의 자식 요소들이 수평정렬한다.
   align-items: center; // 수직 가운데에 iterm들이 위치한다.
+  font-size:16px;
   .logo{
     margin-right:40px;
   }

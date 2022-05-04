@@ -102,7 +102,7 @@ export default {
         loading:true
       })
       try{
-        const res=await _fetchMovie(payload)
+        const res = await _fetchMovie(payload)
         // console.log('searchMovieWithId :',res)
         commit('updateState',{
           theMovie:res.data
