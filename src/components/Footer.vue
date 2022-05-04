@@ -24,6 +24,7 @@ footer{
   padding:70px 0;
   text-align: center;
   opacity: .3;
+  font-size:16px;
   .logo{
    display: block; 
    margin-bottom:4px;
