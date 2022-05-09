@@ -34,11 +34,12 @@ export default {
 
 <style lang="scss" scoped>
 .spinner-border{
-  margin:auto;
-  top:0;
-  bottom:0;
-  left:0;
-  right:0;
+  // 가운데 정렬하는 속성
+  margin:auto; // 가운데 중앙에 배치
+  top:0; // 위쪽에 0
+  bottom:0; // 아래 0
+  left:0; // 왼쪽 0
+  right:0; // 오른쪽 0 
 
   &.absolute{
     position: absolute;

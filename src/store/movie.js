@@ -103,7 +103,7 @@ export default {
       })
       try{
         const res = await _fetchMovie(payload)
-        console.log('searchMovieWithId :',res)
+        console.log('searchMovieWithId :',res) // 영화 정보 
         commit('updateState',{
           theMovie:res.data
         })
