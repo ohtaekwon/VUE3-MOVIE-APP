@@ -35,6 +35,8 @@
 </template>
 
 <script>
+// import axios from 'axios';/
+
 export default {
   data() {
     return{
@@ -82,29 +84,29 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  display: flex ;
+  display: flex ; // input과 select수평정렬
   > * {
     // 전체 선택자
-    margin-right:10px;
-    font-size:15px;
-    &:last-child{
-      margin-right: 0px;
+    margin-right:10px; // 우측 외부 여백 10px
+    font-size:15px; // 글자크기 15px
+    &:last-child{ // 마지막 자식 요소
+      margin-right: 0px; // 0px로 초기화
     }
   }
   .selects{
-    display: flex;
+    display: flex; // selects 내부 수평정렬
     select{
-      width:120px;
-      margin-right: 10px;
-      &:last-child{
-        margin-right: 0px;
+      width:120px; // 가로 너비
+      margin-right: 10px;// 오른쪽 외부 여백 10px
+      &:last-child{ // 마지막 우측 여백은
+        margin-right: 0px; // o으로 초기화
       }
     }
   }
   .btn{
-    width:120px;
-    height: 50px;
-    font-weight:700;
+    width:120px; // 가로 너비
+    height: 50px; // 세로 너비
+    font-weight:700; // 굴기
     flex-shrink: 0; // 감소비율 : 0은 절대 감소하지 않겠다는 의미이다. 
   }
 }

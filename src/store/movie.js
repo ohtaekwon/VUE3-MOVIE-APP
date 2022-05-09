@@ -10,7 +10,7 @@ export default {
   // data
   state : () => ({
     movies:[],
-    message:'Search for the movie title!',
+    message:'영화 제목을 영어로 검색해주세요^^',
     loading:false, // 기본값이 false로 loading이 되고 있지 않은 상태
     theMovie:{}
   }),
@@ -34,7 +34,7 @@ export default {
       // loading이 true일 때, 
       if (state.loading) return 
     
-      // 데이터 수정
+      // 데이터 수정 - 검색이 시작할 때,
       commit('updateState',{
         message:'', // 검색 시에 제일 처음에는 기본 메시지는 없는 메시지로
         loading:true // 검색이 시작되면, loading이 True, 검색이 완료되면 종료가 되어야 한다.
@@ -50,7 +50,7 @@ export default {
       commit('updateState',{
         movies: _uniqBy(Search,'imdbID')
       })
-      
+      console.log(payload.number)
       console.log(totalResults) // frozen 검색시 268 => 27페이지
       console.log(typeof totalResults) // string
 
@@ -135,6 +135,7 @@ export default {
           reject(res.data.Error)
         }
         resolve(res)
+        console.log(res)
       })
       .catch((err)=>{
         reject(err.message)
