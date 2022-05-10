@@ -1,22 +1,15 @@
 <template>
-<!-- 1. Header를 만듬 -->
   <header>
     <Logo/>
     <div class="nav nav-pills">
-      <!-- 4. 반복문 입력 -->
       <div class="nav-item"
         v-for="nav in navigations"
         :key="nav.name">
-        <!-- 2. RouterLink 컴포넌트 -->
-        <!-- 5-1. RouterLink to 속성 추가 -->
-        <!-- 10. active 클래스 추가 -->
         <RouterLink 
           v-bind:to="nav.href"
           active-class="active"
           :class="{ active : isMatch(nav.path) }"
           class="nav-link"> 
-          <!-- 데이터로 관리해 효율적으로 출력하기 위해서 -->
-          <!-- 5-2. -->
           {{ nav.name }} 
         </RouterLink>
       </div>
@@ -40,8 +33,8 @@ export default {
         },
         {
           name:'Movie',
-          href:'/movie/tt6751668',
-          path:/^\/movie/ // '/movie' 
+          href:'/movie/tt6751668 ', // tt6751668 tt4520988
+          path:/^\/movie/   // 정규표현식 - /^\/movie/ - '/movie' 
         },
         {
           name:'About',
@@ -50,11 +43,11 @@ export default {
       ]
     }
   },
-  methods:{
-    isMatch(path){
-      if (!path) return false
-      console.log('this.$route', this.$route)
-      return path.test(this.$route.fullpath)
+    methods:{
+      isMatch(path){
+        if (!path) return false
+        console.log('fullPath :',this.$route.fullPath)
+        return path.test(this.$route.fullPath)
     }
   }
 }
