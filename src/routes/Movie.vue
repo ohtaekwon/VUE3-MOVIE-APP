@@ -22,7 +22,11 @@
       class="movie-details">
       <div
         :style="{backgroundImage:`url(${requestDiffSizeImage(theMovie.Poster)})`}" 
-        class="poster"></div>
+        class="poster">
+        <Loader
+          v-if="imageLoading"
+          absolute/>
+        </div>
       <div class="specs">
         <div class="title">
           {{ theMovie.Title }}
@@ -78,6 +82,12 @@ export default {
   components:{
     Loader:Loader
   },
+  data(){
+    return{
+      imageLoading:true
+    }
+  }
+  ,
   computed:{
     theMovie(){
       return this.$store.state.movie.theMovie
@@ -96,7 +106,12 @@ export default {
   },
   methods:{
     requestDiffSizeImage(url, size=700){
-      return url.replace('SX300',`SX${size}`)
+      const src = url.replace('SX300',`SX${size}`)
+      this.$loadImage(src)
+      .then(()=>{
+        this.imageLoading = false
+      })
+      return src
     }
   }
 }
@@ -115,6 +130,7 @@ export default {
     width:$width;
     height: $width * 3/2;
     margin-right:70px;
+    position: relative;
   }
   .specs{
     flex-grow:1; // 증가 너비를 0에서 1로 하여, 최대한 많은 너비를 사용 

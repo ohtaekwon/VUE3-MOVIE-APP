@@ -2,6 +2,10 @@
   <div
     v-bind:style="{backgroundImage:`url(${movie.Poster})`}"
     class="movie">
+    <Loader 
+      v-if="imageLoading"
+      :size="1.5"
+      absolute/>
     <div class="info">
       <div class="year">
         {{ movie.Year}}
@@ -14,11 +18,30 @@
 </template>
 
 <script>
+import Loader from '~/components/Loader.vue'
 export default {
+  components:{
+    Loader:Loader
+  },
   props:{
     movie:{
       type:Object,
       default:()=>({})
+    }
+  },
+  data(){
+    return {
+      imageLoading:true
+    }
+  },
+  mounted(){
+    this.init()
+  },
+  methods:{
+    // 초기화
+    async init(){
+      await this.$loadImage(this.movie.Poster)
+      this.imageLoading = false
     }
   }
 }
@@ -36,7 +59,7 @@ export default {
   background-color:$gray-400;
   background-size:cover; // 배경이미지가 movie라는 클래스 전체를 덮을 수 있도록 넓이에 맞춰서 출력
   overflow: hidden; // 넘치는 내용을 숨긴다.
-  position: relative; // 포지션 값을 지정
+  position: relative; // 포지션 값을 지정 - 부모요소
   &:hover::after{
     content:"";
     position: absolute;
