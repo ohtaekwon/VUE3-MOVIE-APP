@@ -13,6 +13,7 @@
         <RouterLink 
           v-bind:to="nav.href"
           active-class="active"
+          :class="{ active : isMatch(nav.path) }"
           class="nav-link"> 
           <!-- 데이터로 관리해 효율적으로 출력하기 위해서 -->
           <!-- 5-2. -->
@@ -39,7 +40,8 @@ export default {
         },
         {
           name:'Movie',
-          href:'/movie/tt6751668'
+          href:'/movie/tt6751668',
+          path:/^\/movie/ // '/movie' 
         },
         {
           name:'About',
@@ -48,6 +50,13 @@ export default {
       ]
     }
   },
+  methods:{
+    isMatch(path){
+      if (!path) return false
+      console.log('this.$route', this.$route)
+      return path.test(this.$route.fullpath)
+    }
+  }
 }
 </script>
 
