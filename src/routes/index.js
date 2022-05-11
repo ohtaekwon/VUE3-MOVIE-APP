@@ -5,6 +5,9 @@ import Home from './Home.vue'
 import Movie from './Movie.vue'
 import About from './About.vue'
 
+// Not Found
+import NotFound from'./NotFound.vue'
+
 
 // 2. createRouter를 main.js로 내보내기
 export default createRouter({
@@ -27,5 +30,9 @@ export default createRouter({
       path:'/about',
       component:About
     },
+    {
+      path:'/:notFound(.*)',
+      component:NotFound
+    }
   ]
 })
