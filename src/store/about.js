@@ -6,6 +6,6 @@ export default {
     email: 'ohtk1119@gmail.com',
     blog : 'https://github.com/ohtaekwon/TIL/tree/master/Vue-Movie-Project',
     phone : '+082-10-1234-5678',
-    image : 'https://raw.githubusercontent.com/ohtaekwon/VUE3-MOVIE-APP/master/src/assets/logo.png'
+    image : 'https://raw.githubusercontent.com/ohtaekwon/ohtaekwon/master/img/me.jpg'
   }),
 }

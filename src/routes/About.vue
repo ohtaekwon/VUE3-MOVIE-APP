@@ -11,9 +11,9 @@
     <div class="name">
       {{ name }}
     </div>
-    <div> {{ email }}</div>
-    <div> {{ blog }}</div>
-    <div> {{ phone }}</div>
+    <div class="email" > {{ email }}</div>
+    <div class="blog" > {{ blog }}</div>
+    <div class="phone"> {{ phone }}</div>
   </div>
 </template>
 
@@ -76,6 +76,8 @@ export default {
     position:relative;
     img{
       width:100%;
+      border-radius: 50%;
+      height:100%;
     }
   }
   .name{
@@ -83,6 +85,15 @@ export default {
     font-family: "Oswald", sans-serif ;
     margin-bottom : 20px;
 
+  }
+  .email{
+    font-size:16px;
+  }
+  .blog{
+    font-size:16px;
+  }
+  .phone{
+    font-size:16px;
   }
 }
 
